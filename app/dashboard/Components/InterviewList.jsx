@@ -44,7 +44,7 @@ const InterviewList = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  my-5 gap-5">
       {interviewList.map((interview)=>(
 
-          <div className="flex flex-col gap-1 border p-3 rounded-md shadow-sm"
+          <div className="flex flex-col gap-1 border p-3 rounded-md shadow-md"
           key={interview.id}>
           <h2 className="text-orange-600 font-semibold">{interview.jobPosition}</h2>
           <h2 className="text-sm text-gray-700 font-[500]">{interview.jobExperience} years of exp</h2>
