@@ -42,9 +42,9 @@ const AddNewInterview = () => {
   console.log("Some error occured: ",mockQuestions)
   return
   }
-  const saveRes= saveToDb(mockQuestions)
-
-  if(saveRes.length){
+  const saveRes= await saveToDb(mockQuestions)
+  
+  if(saveRes.length!==0){
   router.push("dashboard/interview/"+saveRes[0].mockId)
   }else{
     console.log("Some error occured")
