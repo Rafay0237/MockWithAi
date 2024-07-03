@@ -1,6 +1,4 @@
-const {
-    GoogleGenerativeAI,
-  } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
   
   const apiKey = process.env.NEXT_PUBLIC_AI_KEY;
   const genAI = new GoogleGenerativeAI(apiKey);
