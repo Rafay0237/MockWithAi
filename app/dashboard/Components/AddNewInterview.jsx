@@ -16,7 +16,7 @@ import { mockInterview } from "@/utils/schema"
 import { LoaderCircle } from "lucide-react"
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
-import { useUser } from "@clerk/nextjs"
+// import { useUser } from "@clerk/nextjs"
 import moment from "moment"
 import { db } from "@/utils/db"
 import { useRouter } from "next/navigation"
@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation"
 const AddNewInterview = () => {
     const [formData,setFormData]=useState({})
     const [loading,setLoading]=useState(false)
-    const {user}=useUser()
+    // const {user}=useUser()
     const router=useRouter()
 
   const handleSubmit=async(e)=>{
@@ -60,7 +60,7 @@ const AddNewInterview = () => {
       jobPosition:formData.jobPosition,
       jobExperience:formData.jobExperience,
       createdAt:moment().format("DD-MM-yyyy"),
-      createdBy:user?.primaryEmailAddress?.emailAddress
+      // createdBy:user?.primaryEmailAddress?.emailAddress
     }).returning({mockId:mockInterview.mockId})
     return saveRes
   }

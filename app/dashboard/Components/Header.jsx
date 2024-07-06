@@ -1,5 +1,5 @@
 "use client"
-import { UserButton } from "@clerk/nextjs"
+// import { UserButton } from "@clerk/nextjs"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
@@ -53,11 +53,11 @@ const Header = () => {
           </Link>
         </DropdownMenuContent>
       </DropdownMenu>
-      <UserButton />
+      {/* <UserButton /> */}
       </div>
         
       <div className="hidden sm:block">
-      <UserButton />
+      {/* <UserButton /> */}
       </div>
     </div>
   )

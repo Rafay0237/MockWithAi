@@ -9,7 +9,7 @@ import useSpeechToText from 'react-hook-speech-to-text';
 import { chatSession } from "@/utils/AI"
 import { useToast } from "@/components/ui/use-toast"
 import { userAnswer } from '@/utils/schema';
-import { useUser } from '@clerk/nextjs';
+// import { useUser } from '@clerk/nextjs';
 import { db } from '@/utils/db';
 import moment from 'moment';
 import { useRouter } from "next/navigation"
@@ -19,7 +19,7 @@ const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
     const [answer, setAnswer] = useState("");
     const [loading, setLoading] = useState(false);
     const {toast}=useToast()
-    const {user}=useUser()
+    // const {user}=useUser()
     const router=useRouter()
     
     const {
@@ -88,7 +88,7 @@ const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
             userAns:answer,
             feedback:feedback.feedback,
             rating:feedback.rating,
-           userEmail:user?.primaryEmailAddress?.emailAddress,
+          //  userEmail:user?.primaryEmailAddress?.emailAddress,
            createdAt:moment().format("DD-MM-yyyy"),
          }).returning({mockId:userAnswer.mockId})
          return saveRes
