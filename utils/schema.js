@@ -23,3 +23,11 @@ userEmail:varchar('userEmail'),
 createdAt:varchar('createdAt'),
 })
 
+export const User=pgTable("User",{
+id:serial('id').primaryKey(),
+email:varchar("email").notNull(),
+userName:varchar("userName").notNull(),
+password:varchar("password").notNull(),
+profilePicture:varchar("profilePicture").default("https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-7.jpg")
+})
+

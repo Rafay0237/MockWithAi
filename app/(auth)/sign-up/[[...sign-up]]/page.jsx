@@ -24,6 +24,9 @@ import {
 import { signUpSchema } from "../../validation";
 import { FormFailure, FormSuccess } from "../../validation";
 import Link from "next/link";
+import { submitData } from "@/app/ApiCalls";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const Page = () => {
   const methods = useForm({
@@ -41,9 +44,29 @@ const Page = () => {
     formState: { errors },
   } = methods;
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const router=useRouter()
+  const {toast}=useToast()
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const onSubmit = async (data,e) => {
+    e.preventDefault()
+    setLoading(true)
+    submitData("users/sign-up","POST",data).then((res)=>{
+      if(!res.success){
+      setErrorMessage(res.message)
+      }else{
+        setErrorMessage(null)
+        setSuccessMessage(res.message)
+        toast({
+          title:"Account Created",
+          description:"Kindly, Login to continue."
+      })
+        router.push("/sign-in")
+
+      }
+  })
+    setLoading(false)
   };
 
   return (
@@ -118,9 +141,13 @@ const Page = () => {
                 />
               </div>
 
-              <FormSuccess message="Logged in!" />
+             {successMessage && <FormSuccess message={successMessage}/>}
+             {errorMessage && <FormFailure message={errorMessage} />}
+
               <Button className="w-full mt-2" type="submit" disabled={loading}>
-                Create new Account
+                {loading?
+                <Loader2 className="h-6 w-6 animate-spin"/>:
+                "Create new Account"}
               </Button>
             </form>
           </FormProvider>

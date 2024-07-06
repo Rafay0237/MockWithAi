@@ -55,7 +55,6 @@ const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
             const feedback=JSON.parse(res.response.text().replace("```json","").replace("```",""))
             if(feedback){
             const savedRes= await saveToDb(feedback)
-            console.log(savedRes)
             if(savedRes){
                 toast({
                     description:"Answer saved successfully"

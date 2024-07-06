@@ -24,6 +24,7 @@ import {
 import { loginSchema } from "../../validation";
 import { FormFailure, FormSuccess } from "../../validation";
 import Link from "next/link";
+import { loginSuccess } from "@/app/redux/user/userSlice";
 
 const Page = () => {
   const methods = useForm({
@@ -39,10 +40,14 @@ const Page = () => {
     register,
     formState: { errors },
   } = methods;
+  
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const onSubmit = async (data) => {
     console.log(data);
+    loginSuccess(data)
   };
 
   return (
@@ -98,7 +103,9 @@ const Page = () => {
                 />
               </div>
 
-              <FormSuccess message="Logged in!" />
+              {successMessage && <FormSuccess message={successMessage}/>}
+              {errorMessage && <FormFailure message={errorMessage} />}
+              
               <Button className="w-full mt-2" type="submit" disabled={loading}>
                 Login
               </Button>
