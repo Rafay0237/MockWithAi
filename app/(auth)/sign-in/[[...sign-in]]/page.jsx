@@ -24,7 +24,12 @@ import {
 import { loginSchema } from "../../validation";
 import { FormFailure, FormSuccess } from "../../validation";
 import Link from "next/link";
-import { loginSuccess } from "@/app/redux/user/userSlice";
+// import { loginSuccess } from "@/redux/user/userSlice";
+// import { useDispatch } from "react-redux";
+import { submitData } from "@/app/ApiCalls";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 const Page = () => {
   const methods = useForm({
@@ -44,10 +49,30 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  // const dispatch=useDispatch()
+  const {toast}=useToast()
+  const router=useRouter()
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    loginSuccess(data)
+  const onSubmit = async (data,e) => {
+    e.preventDefault()
+    setLoading(true)
+    submitData("users/login","POST",data).then((res)=>{
+      console.log(res)
+      if(!res.success){
+        setErrorMessage(res.message)
+      }else{
+        setErrorMessage(null)
+        setSuccessMessage(res.message)
+        // dispatch(loginSuccess(data))
+        toast({
+          title:"Welcome back!",
+          description:"Logged in Successfully!"
+        })
+        router.push("/dashboard")
+      }
+    }).finally(() => {
+      setLoading(false); 
+    });
   };
 
   return (
@@ -107,7 +132,10 @@ const Page = () => {
               {errorMessage && <FormFailure message={errorMessage} />}
               
               <Button className="w-full mt-2" type="submit" disabled={loading}>
-                Login
+               {loading ? <>
+              Loading
+              <Loader2 className="ml-1 h-6 w-6 animate-spin"/>
+              </> : "Login"}
               </Button>
             </form>
           </FormProvider>

@@ -1,14 +1,14 @@
 import {configureStore } from '@reduxjs/toolkit';
 import userReducer from './user/userSlice';
-import { persistReducer, persistStore } from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { useDispatch,useSelector } from 'react-redux';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
 };
-console.log(userReducer)
 
 const persistedReducer = persistReducer(persistConfig, userReducer);
 
@@ -20,6 +20,10 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
+
+export const useAppDispatch = () => useDispatch();
+export const useAppSelector = useSelector;
+
 
 

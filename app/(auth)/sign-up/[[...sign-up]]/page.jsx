@@ -46,27 +46,29 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const router=useRouter()
-  const {toast}=useToast()
+  const router = useRouter();
+  const { toast } = useToast();
 
-  const onSubmit = async (data,e) => {
-    e.preventDefault()
-    setLoading(true)
-    submitData("users/sign-up","POST",data).then((res)=>{
-      if(!res.success){
-      setErrorMessage(res.message)
-      }else{
-        setErrorMessage(null)
-        setSuccessMessage(res.message)
-        toast({
-          title:"Account Created",
-          description:"Kindly, Login to continue."
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
+    setLoading(true);
+    submitData("users/sign-up", "POST", data)
+      .then((res) => {
+        if (!res.success) {
+          setErrorMessage(res.message);
+        } else {
+          setErrorMessage(null);
+          setSuccessMessage(res.message);
+          toast({
+            title: "Account Created",
+            description: "Kindly, Login to continue.",
+          });
+          router.push("/sign-in");
+        }
       })
-        router.push("/sign-in")
-
-      }
-  })
-    setLoading(false)
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -141,13 +143,18 @@ const Page = () => {
                 />
               </div>
 
-             {successMessage && <FormSuccess message={successMessage}/>}
-             {errorMessage && <FormFailure message={errorMessage} />}
+              {successMessage && <FormSuccess message={successMessage} />}
+              {errorMessage && <FormFailure message={errorMessage} />}
 
               <Button className="w-full mt-2" type="submit" disabled={loading}>
-                {loading?
-                <Loader2 className="h-6 w-6 animate-spin"/>:
-                "Create new Account"}
+                {loading ? (
+                  <>
+                    Loading
+                    <Loader2 className="ml-1 h-6 w-6 animate-spin" />
+                  </>
+                ) : (
+                  "Create new Account"
+                )}
               </Button>
             </form>
           </FormProvider>
@@ -164,7 +171,7 @@ const Page = () => {
           <div className="flex gap-2 text-sm text-gray-700 font-semibold">
             <p>Already have an account?</p>
             <Link href={"/sign-in"}>
-            <h2 className="text-gray-900 hover:cursor-pointer">Login</h2>
+              <h2 className="text-gray-900 hover:cursor-pointer">Login</h2>
             </Link>
           </div>
         </CardFooter>
