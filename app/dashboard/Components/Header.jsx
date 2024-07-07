@@ -14,17 +14,11 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { MenuIcon } from "lucide-react"
 import { useSelector } from "react-redux"
-import { useEffect } from "react"
 
 const Header = () => {
   const path= usePathname()
 
-  // const {currentUser}=useSelector((state)=>state.user)
-  const user= useSelector(state => state.user);
-  const currentUser=user?.currentUser
-  useEffect(()=>{
-  console.log(user)
-  },[user])
+  const currentUser= useSelector(state => state.currentUser);
   
   return (
     <div className='flex justify-between p-4 bg-slate-100'>
