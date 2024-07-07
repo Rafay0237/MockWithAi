@@ -16,7 +16,7 @@ import { mockInterview } from "@/utils/schema"
 import { LoaderCircle } from "lucide-react"
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
-// import { useUser } from "@clerk/nextjs"
+import { useSelector } from "react-redux"
 import moment from "moment"
 import { db } from "@/utils/db"
 import { useRouter } from "next/navigation"
@@ -26,13 +26,12 @@ import { useRouter } from "next/navigation"
 const AddNewInterview = () => {
     const [formData,setFormData]=useState({})
     const [loading,setLoading]=useState(false)
-    // const {user}=useUser()
+    const {user}=useSelector((state)=>state.currentUser)
     const router=useRouter()
 
   const handleSubmit=async(e)=>{
   setLoading(true)
   e.preventDefault()
-  console.log(formData)
 
   const prompt= "job position: "+formData.jobPosition+"job description: "+formData.jobDesc+"years of experience: "+ formData.jobExperience+". Based on this data give me "+process.env.NEXT_PUBLIC_NU_OF_QUESTIONS+" interview questions in json format. i want json format only. "
   const res= await chatSession.sendMessage(prompt)
@@ -60,7 +59,7 @@ const AddNewInterview = () => {
       jobPosition:formData.jobPosition,
       jobExperience:formData.jobExperience,
       createdAt:moment().format("DD-MM-yyyy"),
-      // createdBy:user?.primaryEmailAddress?.emailAddress
+      createdBy:user?.email
     }).returning({mockId:mockInterview.mockId})
     return saveRes
   }

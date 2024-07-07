@@ -20,7 +20,7 @@ const ShowQuestion = ({questions,currentIndex}) => {
         }
 
   return (
-    <div className='flex flex-col border rounder-md p-5 justify-evenly'>
+    <div className='flex flex-col border rounded-md rounder-md p-5 justify-evenly'>
          <div className='flex flex-wrap gap-3 font-[500]'>
           {questions?.map((q,index)=>(
             <h2 className={`border rounded-3xl p-2 px-3 text-sm ${currentIndex===index ? "bg-primary text-white": "bg-gray-200 "}`}

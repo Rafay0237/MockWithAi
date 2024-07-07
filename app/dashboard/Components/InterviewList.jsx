@@ -4,30 +4,31 @@ import { Ghost, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { eq } from "drizzle-orm";
 import { mockInterview } from "@/utils/schema";
-// import { useUser } from "@clerk/nextjs";
+import { useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const InterviewList = () => {
-  // const { user } = useUser();
+  
   const [interviewList, setInterviewList] = useState(null);
   const [loading, setLoading] = useState(null);
+  const {user}=useSelector((state)=>state.currentUser)
 
-  // useEffect(() => {
-  //   getInterviewList();
-  // }, [user]);
+  useEffect(() => {
+    getInterviewList();
+  }, [user]);
 
-  // const getInterviewList = async () => {
-  //   setLoading(true)
-  //   const res = await db
-  //     .select()
-  //     .from(mockInterview)
-  //     .where(
-  //       eq(mockInterview.createdBy, user?.primaryEmailAddress?.emailAddress)
-  //     );
-  //     setInterviewList(res)
-  //     setLoading(false)
-  // };
+  const getInterviewList = async () => {
+    setLoading(true)
+    const res = await db
+      .select()
+      .from(mockInterview)
+      .where(
+        eq(mockInterview.createdBy, user?.email)
+      );
+      setInterviewList(res)
+      setLoading(false)
+  };
 
   if (loading) {
     return (

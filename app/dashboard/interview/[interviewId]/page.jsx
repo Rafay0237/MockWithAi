@@ -10,7 +10,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button";
 
 const page = ({ params }) => {
-  // 4f2ce74e-4a3b-4f99-97ff-d4d795d12656
+  
   const [interviewData, setInterviewData] = useState(null);
   const [webCamEnabled, setWebCamEnabled] = useState(false);
 

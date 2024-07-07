@@ -9,17 +9,17 @@ import useSpeechToText from 'react-hook-speech-to-text';
 import { chatSession } from "@/utils/AI"
 import { useToast } from "@/components/ui/use-toast"
 import { userAnswer } from '@/utils/schema';
-// import { useUser } from '@clerk/nextjs';
+import { useSelector } from 'react-redux';
 import { db } from '@/utils/db';
 import moment from 'moment';
 import { useRouter } from "next/navigation"
 
 const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
-// get mock id 
+
     const [answer, setAnswer] = useState("");
     const [loading, setLoading] = useState(false);
     const {toast}=useToast()
-    // const {user}=useUser()
+    const {user}=useSelector((state)=>state.currentUser)
     const router=useRouter()
     
     const {
@@ -87,7 +87,7 @@ const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
             userAns:answer,
             feedback:feedback.feedback,
             rating:feedback.rating,
-          //  userEmail:user?.primaryEmailAddress?.emailAddress,
+           userEmail:user?.email,
            createdAt:moment().format("DD-MM-yyyy"),
          }).returning({mockId:userAnswer.mockId})
          return saveRes
@@ -109,7 +109,7 @@ const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
       }
 
   return (
-    <div className='flex flex-col border rounder-md p-5 gap-3 relative'>
+    <div className='flex flex-col border rounded-md rounder-md p-5 gap-3 relative'>
         {error ?<>
        <h2 className='text-red-600'> Speech to text is not supported on your browser.</h2>
        <h2 >Type your answer:</h2>
@@ -119,7 +119,7 @@ const RecordUserAnswer = ({setCurrentIndex,question,currentIndex,mockId}) => {
         <Textarea className="text-sm" rows={5}
         placeholder="Write a breif answer, max 200 words."
         value={answer}
-        required maxLength={200}
+        required maxLength={300}
         onChange={(e)=>setAnswer(e.target.value)}/>
 
         

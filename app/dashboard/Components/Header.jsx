@@ -21,11 +21,11 @@ const Header = () => {
   const currentUser= useSelector(state => state.currentUser);
   
   return (
-    <div className='flex justify-between p-4 bg-slate-100'>
+    <div className='flex justify-between p-2 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 to-gray-200'>
       <Image width={30} height={30}
       src={"/logo.svg"} alt="logo"/>
 
-      <ul className="hidden sm:flex gap-5 pt-1">
+      <ul className="hidden sm:flex gap-5 pt-2.5">
         <li className={"hover:cursor-pointer text-sm sm:text-[16px]  h-6 "+(path==='/dashboard'?"border-orange-600 border-b-2 ":"hover:text-orange-600 ")}>
         <Link href={"/dashboard"}>
         Dashboard
