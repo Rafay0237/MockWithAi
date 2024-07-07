@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.14.0",
+    "@headlessui/react": "^2.1.2",
     "@hookform/resolvers": "^3.9.0",
     "@neondatabase/serverless": "^0.9.3",
     "@radix-ui/react-collapsible": "^1.1.0",

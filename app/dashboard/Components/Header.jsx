@@ -1,5 +1,6 @@
 "use client"
-// import { UserButton } from "@clerk/nextjs"
+
+import UserButton from "./UserButton" 
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
@@ -12,10 +13,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MenuIcon } from "lucide-react"
-
+import { useSelector } from "react-redux"
+import { useEffect } from "react"
 
 const Header = () => {
-    const path= usePathname()
+  const path= usePathname()
+
+  // const {currentUser}=useSelector((state)=>state.user)
+  const user= useSelector(state => state.user);
+  const currentUser=user?.currentUser
+  useEffect(()=>{
+  console.log(user)
+  },[user])
+  
   return (
     <div className='flex justify-between p-4 bg-slate-100'>
       <Image width={30} height={30}
@@ -53,11 +63,11 @@ const Header = () => {
           </Link>
         </DropdownMenuContent>
       </DropdownMenu>
-      {/* <UserButton /> */}
+      <UserButton img={currentUser?.user?.profilePicture}/>
       </div>
         
       <div className="hidden sm:block">
-      {/* <UserButton /> */}
+      <UserButton img={currentUser?.user?.profilePicture}/>
       </div>
     </div>
   )

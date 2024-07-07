@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -24,8 +24,8 @@ import {
 import { loginSchema } from "../../validation";
 import { FormFailure, FormSuccess } from "../../validation";
 import Link from "next/link";
-// import { loginSuccess } from "@/redux/user/userSlice";
-// import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/redux/user/userSlice";
+import { useDispatch } from "react-redux";
 import { submitData } from "@/app/ApiCalls";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
@@ -49,7 +49,7 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  // const dispatch=useDispatch()
+  const dispatch=useDispatch()
   const {toast}=useToast()
   const router=useRouter()
 
@@ -63,7 +63,7 @@ const Page = () => {
       }else{
         setErrorMessage(null)
         setSuccessMessage(res.message)
-        // dispatch(loginSuccess(data))
+        dispatch(loginSuccess({token:res.token,user:res.user}))
         toast({
           title:"Welcome back!",
           description:"Logged in Successfully!"

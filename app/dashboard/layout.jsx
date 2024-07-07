@@ -1,14 +1,15 @@
-import Header from "./Components/Header"
+import Header from "./Components/Header";
+import PrivateRoute from "../privateRoute";
 
-const DashBoardLayout = ({children}) => {
+const DashBoardLayout = ({ children }) => {
   return (
     <div>
-      <Header/>
+      <Header />
       <div className="mx-5 md:mx-10 lg:mx-20 ">
-      {children}
+        <PrivateRoute>{children}</PrivateRoute>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashBoardLayout
+export default DashBoardLayout;
