@@ -1,5 +1,5 @@
 import Header from "./Components/Header";
-import PrivateRoute from "../privateRoute";
+import PrivateRoute from "../PrivateRoute";
 
 const DashBoardLayout = ({ children }) => {
   return (
