@@ -53,7 +53,7 @@ const SendMessage = () => {
           className='w-24 text-[16px] pt-1'>Name:</label>
           <input 
           className='p-2 border border-gray-400 rounded-sm w-full md:w-2/3 '
-            type="email" 
+            type="text" 
             id="email" 
             name="email" 
             placeholder='Your name or email.'

@@ -15,7 +15,7 @@ const UserButton =  ({ user }) => {
             <img
               src={user.image}
               alt="Profile"
-              className="h-10 w-10 rounded-full object-cover"
+              className="h-8 w-8 rounded-full object-cover"
             />
           )}
         </Button>
