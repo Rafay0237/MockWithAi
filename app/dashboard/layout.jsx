@@ -1,12 +1,16 @@
 import Header from "./Components/Header";
-import PrivateRoute from "../PrivateRoute";
+import { auth } from "@/auth";
+import { redirect } from 'next/navigation';
 
-const DashBoardLayout = ({ children }) => {
+const DashBoardLayout = async({ children }) => {
+  const session=await auth()
+  if(!session?.user) redirect("/sign-in")
+
   return (
     <div>
-      <Header />
+      <Header user={session?.user} />
       <div className="mx-5 md:mx-10 lg:mx-20 ">
-        <PrivateRoute>{children}</PrivateRoute>
+          {children}
       </div>
     </div>
   );

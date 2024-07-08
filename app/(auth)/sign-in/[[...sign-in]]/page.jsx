@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import {
   Card,
   CardContent,
@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -30,6 +28,7 @@ import { submitData } from "@/app/ApiCalls";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import OAuth from "../../OAuth";
 
 const Page = () => {
   const methods = useForm({
@@ -57,7 +56,6 @@ const Page = () => {
     e.preventDefault()
     setLoading(true)
     submitData("users/login","POST",data).then((res)=>{
-      console.log(res)
       if(!res.success){
         setErrorMessage(res.message)
       }else{
@@ -141,14 +139,9 @@ const Page = () => {
           </FormProvider>
         </CardContent>
         <CardFooter className="flex flex-col gap-5">
-          <div className="flex gap-3 w-full">
-            <Button className="w-1/2" variant="outline">
-              <FcGoogle className="h-5 w-5" />
-            </Button>
-            <Button className="w-1/2" variant="outline">
-              <FaGithub className="h-5 w-5" />
-            </Button>
-          </div>
+          
+          <OAuth/>
+
           <div className="flex gap-2 text-sm text-gray-700 font-semibold">
             <p>Don't have an account?</p>
             <Link href={"/sign-up"}>

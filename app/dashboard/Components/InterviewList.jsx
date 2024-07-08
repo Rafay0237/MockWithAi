@@ -4,15 +4,13 @@ import { Ghost, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { eq } from "drizzle-orm";
 import { mockInterview } from "@/utils/schema";
-import { useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const InterviewList = () => {
+const InterviewList = ({user}) => {
   
   const [interviewList, setInterviewList] = useState(null);
   const [loading, setLoading] = useState(null);
-  const {user}=useSelector((state)=>state.currentUser)
 
   useEffect(() => {
     getInterviewList();

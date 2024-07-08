@@ -13,12 +13,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MenuIcon } from "lucide-react"
-import { useSelector } from "react-redux"
 
-const Header = () => {
+const Header = ({user}) => {
   const path= usePathname()
-
-  const currentUser= useSelector(state => state.currentUser);
+ 
   
   return (
     <div className='flex justify-between p-2 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 to-gray-200'>
@@ -57,11 +55,12 @@ const Header = () => {
           </Link>
         </DropdownMenuContent>
       </DropdownMenu>
-      <UserButton img={currentUser?.user?.profilePicture}/>
+
+      <UserButton  user={user}/>
       </div>
         
       <div className="hidden sm:block">
-      <UserButton img={currentUser?.user?.profilePicture}/>
+      <UserButton  user={user}/>
       </div>
     </div>
   )

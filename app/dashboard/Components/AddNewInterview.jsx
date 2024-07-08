@@ -16,17 +16,15 @@ import { mockInterview } from "@/utils/schema"
 import { LoaderCircle } from "lucide-react"
 import { useState } from "react"
 import {v4 as uuidv4} from "uuid"
-import { useSelector } from "react-redux"
 import moment from "moment"
 import { db } from "@/utils/db"
 import { useRouter } from "next/navigation"
 
   
 
-const AddNewInterview = () => {
+const AddNewInterview = ({user}) => {
     const [formData,setFormData]=useState({})
     const [loading,setLoading]=useState(false)
-    const {user}=useSelector((state)=>state.currentUser)
     const router=useRouter()
 
   const handleSubmit=async(e)=>{

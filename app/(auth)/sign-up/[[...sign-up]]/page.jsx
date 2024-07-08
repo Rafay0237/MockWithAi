@@ -10,8 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import OAuth from "../../OAuth";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -160,14 +159,9 @@ const Page = () => {
           </FormProvider>
         </CardContent>
         <CardFooter className="flex flex-col gap-5">
-          <div className="flex gap-3 w-full">
-            <Button className="w-1/2" variant="outline">
-              <FcGoogle className="h-5 w-5" />
-            </Button>
-            <Button className="w-1/2" variant="outline">
-              <FaGithub className="h-5 w-5" />
-            </Button>
-          </div>
+
+          <OAuth/>
+          
           <div className="flex gap-2 text-sm text-gray-700 font-semibold">
             <p>Already have an account?</p>
             <Link href={"/sign-in"}>
