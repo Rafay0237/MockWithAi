@@ -20,7 +20,6 @@ const SpeechToText = ({setAnswer}) => {
 
       const saveSpeech=async()=>{
         if(isRecording){
-          console.log(interimResult)
           stopSpeechToText()
           if(interimResult.length<10){
             toast({
