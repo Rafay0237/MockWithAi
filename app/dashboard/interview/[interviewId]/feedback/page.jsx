@@ -70,16 +70,16 @@ const page = ({ params }) => {
         <h2 className={"font-[500] "+overallRating&&  overallRating>5? "text-green-600" :"text-red-700"}>Overall Rating: {overallRating}/10</h2>}
       </div>
 
-        <div className="flex flex-col gap-4  w-2/3">
+        <div className="flex flex-col gap-4 w-full md:w-2/3 ">
           {feedbackList && feedbackList.map((feedback,index) => (
-            <div  key={index}>
+            <div  key={index} >
             <Collapsible>
               <CollapsibleTrigger className="flex bg-slate-100 text-left rounded-md p-2">
               <h2><strong>Q{index+1}:</strong> {feedback?.question}</h2>
 
-              <div className="flex flex-col items-end gap-2 text-sm  w-48">
+              <div className="flex flex-col items-end gap-2 text-sm  w-52 ">
             
-              <h2 className={"text-end "+(feedback.rating ==5 ?"text-yellow-400" :(feedback.rating>5?"text-green-700": "text-red-700" ))}>
+              <h2 className={"text-end text-[10px] sm:text-sm  "+(feedback.rating ==5 ?"text-yellow-400" :(feedback.rating>5?"text-green-700": "text-red-700" ))}>
                 <strong>Rating: {feedback?.rating}</strong> </h2>
               <h2 ><ArrowDownCircle/></h2>
               </div>
